@@ -1,0 +1,11 @@
+{
+   "name": "GO_DEV_WITH_VSCODE",
+   "dockerFile": "../Dockerfile",
+   "appPort": [
+      "8080:8080"
+   ],
+   "extensions": [
+      "golang.go"
+   ],
+   "postAttachCommand": "go get -u github.com/gin-gonic/gin"
+}
