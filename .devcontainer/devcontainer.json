@@ -7,5 +7,6 @@
    "extensions": [
       "golang.go"
    ],
-   "postAttachCommand": "go get -u github.com/gin-gonic/gin"
+   "postAttachCommand": "air",
+   "postCreateCommand": "go get -u github.com/gin-gonic/gin"
 }
