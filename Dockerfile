@@ -45,8 +45,5 @@ RUN apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
-# SET WORKING DIRECTORY
-WORKDIR /air
-
 # START THE CONTAINER
 ENTRYPOINT ["tail", "-f", "/dev/null"]
