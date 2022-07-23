@@ -1,21 +1,21 @@
 FROM debian:stable-slim
 
 # ATT PACKAGES AND INSTALL HELPFUL
-RUN apt update -y && \
-    apt upgrade -y && \
-    apt install curl -y && \
-    apt install gcc -y && \
-    apt install git -y && \
-    apt install iproute2 -y && \
-    apt install procps -y && \
-    apt install lsb-release -y && \
-    apt install make
+RUN apt update -y \
+    && apt upgrade -y \
+    && apt install curl -y \
+    && apt install gcc -y \
+    && apt install git -y \
+    && apt install iproute2 -y \
+    && apt install procps -y \
+    && apt install lsb-release -y \
+    && apt install make
 
 # INSTALL GO
-RUN cd /tmp && \
-    curl -sSfL https://dl.google.com/go/go1.18.4.linux-amd64.tar.gz --output ./go.tar && \
-    tar -C /usr/local -xzf go.tar && \
-    chmod +x /usr/local/go
+RUN cd /tmp \
+    && curl -sSfL https://dl.google.com/go/go1.18.4.linux-amd64.tar.gz --output ./go.tar \
+    && tar -C /usr/local -xzf go.tar \
+    && chmod +x /usr/local/go
 
 # SETTING UP GO TO PATH
 ENV GOPATH=/go
@@ -26,11 +26,6 @@ RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh 
 
 # INSTALL GO TOOLS.
 RUN apt update -y \
-    # INSTALL GOCODE-GOMOD.
-    # && go install -x github.com/stamblerre/gocode@latest 2>&1 \
-    # && go build -o gocode-gomod github.com/stamblerre/gocode \
-    # && mv gocode-gomod $GOPATH/bin/ \
-    # INSTALL OTHER TOOLS.
     && go install github.com/go-delve/delve/cmd/dlv@latest \
     && go install golang.org/x/tools/gopls@latest \
     && go install github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest \
@@ -41,9 +36,9 @@ RUN apt update -y \
     && go install honnef.co/go/tools/cmd/staticcheck@latest
 
 # CLEAN UP
-RUN apt-get autoremove -y && \
-    apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
 
 # START THE CONTAINER
 ENTRYPOINT ["tail", "-f", "/dev/null"]
